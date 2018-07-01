@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+<style>
+    .row {
+        display: flex;
+    }
+
+    .row>div {
+        flex: 1;
+        border-right: 1px solid grey;
+        border-bottom: 1px solid grey;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <h4 class="text text-center">{{test}}</h4>
+        <br>
+        <br>
+        <div class='row'>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                <div style="border-bottom:1px solid grey;">Sun</div>
+                <br>
+                <div v-for="item in info">
+                    <div v-if="day(item.birthday.dmy) == 'Sun'">
+                        <img v-bind:src="item.photo" alt=""> 
+                        {{item.name}}
+                         <!-- {{item.birthday.dmy}}
+                        {{day(item.birthday.dmy)}}  -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                <div style="border-bottom:1px solid grey;">Mon</div>
+                <br>
+                <div v-for="item in info">
+                    <div v-if="day(item.birthday.dmy) == 'Mon'">
+                        <img v-bind:src="item.photo" alt=""> 
+                        {{item.name}}
+                        <!-- {{item.birthday.dmy}}
+                        {{day(item.birthday.dmy)}}  -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                <div style="border-bottom:1px solid grey;">Tue</div>
+                <br>
+                <div v-for="item in info">
+                    <div v-if="day(item.birthday.dmy) == 'Tue'">
+                        <img v-bind:src="item.photo" alt=""> 
+                        {{item.name}}
+                        <!-- {{item.birthday.dmy}}
+                        {{day(item.birthday.dmy)}}  -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                <div style="border-bottom:1px solid grey;">Wed</div>
+                <br>
+                <div v-for="item in info">
+                    <div v-if="day(item.birthday.dmy) == 'Wed'">
+                        <img v-bind:src="item.photo" alt=""> 
+                        {{item.name}}
+                        <!-- {{item.birthday.dmy}}
+                        {{day(item.birthday.dmy)}}  -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                <div style="border-bottom:1px solid grey;">Thu</div>
+                <br>
+                <div v-for="item in info">
+                    <div v-if="day(item.birthday.dmy) == 'Thu'">
+                        <img v-bind:src="item.photo" alt=""> 
+                        {{item.name}}
+                        <!-- {{item.birthday.dmy}}
+                        {{day(item.birthday.dmy)}}  -->
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                <div style="border-bottom:1px solid grey;">Fri</div>
+                <br>
+                <div v-for="item in info">
+                    <div v-if="day(item.birthday.dmy) == 'Fri'">
+                        <img v-bind:src="item.photo" alt=""> 
+                        {{item.name}}
+                        <!-- {{item.birthday.dmy}}
+                        {{day(item.birthday.dmy)}}  -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                <div style="border-bottom:1px solid grey;">Sat</div>
+                <br>
+                <div v-for="item in info">
+                    <div v-if="day(item.birthday.dmy) == 'Sat'">
+                        <img v-bind:src="item.photo" alt=""> 
+                        {{item.name}}
+                        <!-- {{item.birthday.dmy}}
+                        {{day(item.birthday.dmy)}}  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div v-for="item in info">
+            {{ item.birthday.dmy }}
+         </div> -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.2.1/moment.min.js"></script>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            info: null,
+            link: 'http://uinames.com/api/?ext&amount=25',
+            test: 'Test B with Vue.JS'
+
+        },
+        methods: {
+            getdata: function () {
+                axios.get(this.link)
+                    .then(response => (this.info = response.data))
+            },
+            day: function (d) {
+                return moment(d, 'DD/MM/YYYY').format('ddd');
+            }
+        },
+        mounted: function () {
+            this.getdata();
+        }
+        
+    })
+</script>
+
+</html>
